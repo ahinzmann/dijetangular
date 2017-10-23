@@ -1,0 +1,89 @@
+#include "UHH2/dijetangular/include/dijetangularSelections.h"
+#include "UHH2/core/include/Event.h"
+
+#include <stdexcept>
+
+using namespace uhh2examples;
+using namespace uhh2;
+
+
+DijetSelection::DijetSelection(std::string treename, float chi_max, float yboost_max, float mjj_min)
+   : chi_max_(chi_max), yboost_max_(yboost_max), mjj_min_(mjj_min)
+   , weight_(1.)
+   , lheweight_(1.)
+   , puweight_(1.)
+   , lumiweight_(1.)
+   , varnames("jetAK4_pt1:jetAK4_eta1:jetAK4_y1:jetAK4_phi1:jetAK4_mass1:jetAK4_jec1:jetAK4_muf1:jetAK4_phf1:jetAK4_emf1:jetAK4_nhf1:jetAK4_chf1:jetAK4_area1:jetAK4_cm1:jetAK4_nm1:jetAK4_hof1:jetAK4_chm1:jetAK4_neHadMult1:jetAK4_phoMult1:jetAK4_nemf1:jetAK4_cemf1:jetAK4_csv1:jetAK4_IDTight1:jetAK4_pt2:jetAK4_eta2:jetAK4_y2:jetAK4_phi2:jetAK4_mass2:jetAK4_jec2:jetAK4_muf2:jetAK4_phf2:jetAK4_emf2:jetAK4_nhf2:jetAK4_chf2:jetAK4_area2:jetAK4_cm2:jetAK4_nm2:jetAK4_hof2:jetAK4_chm2:jetAK4_neHadMult2:jetAK4_phoMult2:jetAK4_nemf2:jetAK4_cemf2:jetAK4_csv2:jetAK4_IDTight2:jetAK4_pt3:jetAK4_eta3:jetAK4_y3:jetAK4_phi3:jetAK4_mass3:jetAK4_jec3:jetAK4_muf3:jetAK4_phf3:jetAK4_emf3:jetAK4_nhf3:jetAK4_chf3:jetAK4_area3:jetAK4_cm3:jetAK4_nm3:jetAK4_hof3:jetAK4_chm3:jetAK4_neHadMult3:jetAK4_phoMult3:jetAK4_nemf3:jetAK4_cemf3:jetAK4_csv3:jetAK4_IDTight3:MET_et:MET_sumEt:EVENT_event:EVENT_run:EVENT_lumiBlock:PV_N:mjj:chi:yboost") {
+   std::string ending="_tree.root";
+   std::cerr << treename+ending << std::endl;
+   outfile=new TFile((treename+ending).c_str(),"RECREATE");
+   tree=new TNtuple("tree","tree",varnames.c_str());
+   tree->Branch("HLT_isFired","map<string,bool>",&HLT_isFired);
+}
+    
+bool DijetSelection::passes(const Event & event){
+    assert(event.jets); // if this fails, it probably means jets are not read in
+    if(event.jets->size() < 2) return false;
+    const auto & j1 = event.jets->at(0);
+    const auto & j2 = event.jets->at(1);
+    jet1.SetPtEtaPhiE( j1.pt(), j1.eta(), j1.phi(), j1.energy() );
+    jet2.SetPtEtaPhiE( j2.pt(), j2.eta(), j2.phi(), j2.energy() );
+    dijet=jet1+jet2;
+
+    dijet_mass = dijet.M();
+    dijet_chi = exp(fabs(jet1.Rapidity()-jet2.Rapidity()));
+    dijet_yboost = fabs(jet1.Rapidity()+jet2.Rapidity())/2.;
+
+    if(dijet_chi>chi_max_) return false;
+    if(dijet_mass<mjj_min_) return false;
+    if(dijet_yboost>yboost_max_) return false;
+
+    bool jet1ID=((event.jets->at(0).neutralHadronEnergyFraction()<0.99)&&
+	     (event.jets->at(0).neutralEmEnergyFraction()<0.99)&&
+	     (event.jets->at(0).numberOfDaughters()>1)&&
+	     ((fabs(event.jets->at(0).eta())>2.4)||
+	      ((event.jets->at(0).chargedHadronEnergyFraction()>0)&&
+	       (event.jets->at(0).chargedMultiplicity()>0)&&
+	       (event.jets->at(0).chargedEmEnergyFraction()<0.99))));
+	     
+    bool jet2ID=((event.jets->at(1).neutralHadronEnergyFraction()<0.99)&&
+	     (event.jets->at(1).neutralEmEnergyFraction()<0.99)&&
+	     (event.jets->at(1).numberOfDaughters()>1)&&
+	     ((fabs(event.jets->at(1).eta())>2.4)||
+	      ((event.jets->at(1).chargedHadronEnergyFraction()>0)&&
+	       (event.jets->at(1).chargedMultiplicity()>0)&&
+	       (event.jets->at(1).chargedEmEnergyFraction()<0.99))));
+
+    values.clear();
+    values.insert(values.end(),{event.jets->at(0).pt(),event.jets->at(0).eta(),std::max(std::min(float(event.jets->at(0).v4().Rapidity()),999.f),-999.f),event.jets->at(0).phi(),float(event.jets->at(0).v4().mass()), event.jets->at(0).JEC_factor_raw(),event.jets->at(0).muonEnergyFraction(),event.jets->at(0).photonEnergyFraction(),-999.f,event.jets->at(0).neutralHadronEnergyFraction(), event.jets->at(0).chargedHadronEnergyFraction(),event.jets->at(0).jetArea(),float(event.jets->at(0).chargedMultiplicity()),float(event.jets->at(0).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(0).photonMultiplicity()),event.jets->at(0).neutralEmEnergyFraction(),event.jets->at(0).chargedEmEnergyFraction(),event.jets->at(0).btag_combinedSecondaryVertexMVA(),float(jet1ID)});
+    values.insert(values.end(),{event.jets->at(1).pt(),event.jets->at(1).eta(),std::max(std::min(float(event.jets->at(1).v4().Rapidity()),999.f),-999.f),event.jets->at(1).phi(),float(event.jets->at(1).v4().mass()), event.jets->at(1).JEC_factor_raw(),event.jets->at(1).muonEnergyFraction(),event.jets->at(1).photonEnergyFraction(),-999.f,event.jets->at(1).neutralHadronEnergyFraction(), event.jets->at(1).chargedHadronEnergyFraction(),event.jets->at(1).jetArea(),float(event.jets->at(1).chargedMultiplicity()),float(event.jets->at(1).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(1).photonMultiplicity()),event.jets->at(1).neutralEmEnergyFraction(),event.jets->at(1).chargedEmEnergyFraction(),event.jets->at(1).btag_combinedSecondaryVertexMVA(),float(jet2ID)});
+    if(event.jets->size()>2) {
+      bool jet3ID=((event.jets->at(2).neutralHadronEnergyFraction()<0.99)&&
+	     (event.jets->at(2).neutralEmEnergyFraction()<0.99)&&
+	     (event.jets->at(2).numberOfDaughters()>1)&&
+	     ((fabs(event.jets->at(2).eta())>2.4)||
+	      ((event.jets->at(2).chargedHadronEnergyFraction()>0)&&
+	       (event.jets->at(2).chargedMultiplicity()>0)&&
+	       (event.jets->at(2).chargedEmEnergyFraction()<0.99))));
+
+      values.insert(values.end(),{event.jets->at(2).pt(),event.jets->at(2).eta(),std::max(std::min(float(event.jets->at(2).v4().Rapidity()),999.f),-999.f),event.jets->at(2).phi(),float(event.jets->at(2).v4().mass()), event.jets->at(2).JEC_factor_raw(),event.jets->at(2).muonEnergyFraction(),event.jets->at(2).photonEnergyFraction(),-999.f,event.jets->at(2).neutralHadronEnergyFraction(), event.jets->at(2).chargedHadronEnergyFraction(),event.jets->at(2).jetArea(),float(event.jets->at(2).chargedMultiplicity()),float(event.jets->at(2).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(2).photonMultiplicity()),event.jets->at(2).neutralEmEnergyFraction(),event.jets->at(2).chargedEmEnergyFraction(),event.jets->at(2).btag_combinedSecondaryVertexMVA(),float(jet3ID)});
+    } else {
+      values.insert(values.end(),{-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f});
+    }
+    values.insert(values.end(),{event.met->pt(),-999.f,float(event.event),float(event.run),float(event.luminosityBlock),float(event.pvs->size()),dijet_mass,std::min(dijet_chi,999.f),std::min(dijet_yboost,999.f)});
+    
+    HLT_isFired.clear();
+    for(auto triggername : event.get_current_triggernames()) {
+	Event::TriggerIndex triggerIndex=event.get_trigger_index(triggername);
+        HLT_isFired[triggername]=event.passes_trigger(triggerIndex);
+    }
+    tree->Fill(&values[0]);
+
+    return true;
+}
+
+DijetSelection::~DijetSelection() {
+  outfile->Write();
+  delete tree;
+  delete outfile;
+}
