@@ -68,6 +68,7 @@ def write_job(Job,Version=-1,SkipEvents=0,MaxEvents=-1,NFile=None, FileSplit=-1,
             InputGrandchild.setAttribute('Lumi', str(float(cycle.Cycle_InputData[p].Lumi)*cycleLumiWeight))
             InputGrandchild.setAttribute('Type', cycle.Cycle_InputData[p].Type)
             InputGrandchild.setAttribute('Version', cycle.Cycle_InputData[p].Version)
+	    thisVersion=cycle.Cycle_InputData[p].Version
             if FileSplit!=-1:
                 InputGrandchild.setAttribute('Cacheable', 'False')
             else:
@@ -115,7 +116,7 @@ def write_job(Job,Version=-1,SkipEvents=0,MaxEvents=-1,NFile=None, FileSplit=-1,
             ConfigGrandGrandchild = doc.createElement('Item')
             ConfigGrandchild.appendChild(ConfigGrandGrandchild)
             ConfigGrandGrandchild.setAttribute('Name',item.Name)
-            ConfigGrandGrandchild.setAttribute('Value',cycle.Cycle_InputData[0].Version+'_'+str(NFile))
+            ConfigGrandGrandchild.setAttribute('Value',thisVersion+'_'+str(NFile))
           else:
 	    ConfigGrandGrandchild = doc.createElement('Item')
             ConfigGrandchild.appendChild(ConfigGrandGrandchild)
