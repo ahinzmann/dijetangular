@@ -38,21 +38,23 @@ bool DijetSelection::passes(const Event & event){
     if(dijet_mass<mjj_min_) return false;
     if(dijet_yboost>yboost_max_) return false;
 
-    bool jet1ID=((event.jets->at(0).neutralHadronEnergyFraction()<0.99)&&
-	     (event.jets->at(0).neutralEmEnergyFraction()<0.99)&&
+    bool jet1ID=((event.jets->at(0).neutralHadronEnergyFraction()<0.9)&&
+	     (event.jets->at(0).neutralEmEnergyFraction()<0.9)&&
 	     (event.jets->at(0).numberOfDaughters()>1)&&
+	     (event.jets->at(0).muonEnergyFraction()<0.8)&&
 	     ((fabs(event.jets->at(0).eta())>2.4)||
 	      ((event.jets->at(0).chargedHadronEnergyFraction()>0)&&
 	       (event.jets->at(0).chargedMultiplicity()>0)&&
-	       (event.jets->at(0).chargedEmEnergyFraction()<0.99))));
+	       (event.jets->at(0).chargedEmEnergyFraction()<0.9))));
 	     
-    bool jet2ID=((event.jets->at(1).neutralHadronEnergyFraction()<0.99)&&
-	     (event.jets->at(1).neutralEmEnergyFraction()<0.99)&&
+    bool jet2ID=((event.jets->at(1).neutralHadronEnergyFraction()<0.9)&&
+	     (event.jets->at(1).neutralEmEnergyFraction()<0.9)&&
 	     (event.jets->at(1).numberOfDaughters()>1)&&
+	     (event.jets->at(1).muonEnergyFraction()<0.8)&&
 	     ((fabs(event.jets->at(1).eta())>2.4)||
 	      ((event.jets->at(1).chargedHadronEnergyFraction()>0)&&
 	       (event.jets->at(1).chargedMultiplicity()>0)&&
-	       (event.jets->at(1).chargedEmEnergyFraction()<0.99))));
+	       (event.jets->at(1).chargedEmEnergyFraction()<0.9))));
 
     if((!jet1ID)||(!jet2ID)) return false;
 

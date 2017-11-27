@@ -62,6 +62,7 @@ dijetangularModule::dijetangularModule(Context & ctx) {
     common.reset(new CommonModules());
     // TODO: configure common here, e.g. by 
     // calling common->set_*_id or common->disable_*
+    common->disable_jetpfidfilter();
     common->init(ctx);
     //jetcleaner.reset(new JetCleaner(ctx, 30.0, 2.4)); 
     
