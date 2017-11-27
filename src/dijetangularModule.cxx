@@ -95,17 +95,14 @@ bool dijetangularModule::process(Event & event) {
     cout << "dijetangularModule: Starting to process event (runid, eventid) = (" << event.run << ", " << event.event << "); weight = " << event.weight << endl;
     
     // 1. run all modules other modules.
-    common->process(event);
-    //jetcleaner->process(event);
+    bool pass_cm = common->process(event);
+    if(!pass_cm) std::cout << "Event rejected by common modules" << std::endl;
     
-    // 2. test selections and fill histograms
-    //h_nocuts->fill(event);
-    
-    bool dijet_selection = dijet_sel->passes(event);
+    bool dijet_selection = ((pass_cm) && (dijet_sel->passes(event)));
     if(dijet_selection){
         h_dijet->fill(event);
     }
-    // 3. decide whether or not to keep the current event in the output:
+    // 2. decide whether or not to keep the current event in the output:
     return dijet_selection;
 }
 

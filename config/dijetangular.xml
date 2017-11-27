@@ -12035,6 +12035,7 @@
             <Item Name="pileup_directory" Value="" />
 	    <Item Name="pileup_directory_data" Value="/afs/desy.de/user/h/hinzmann/uhh-substructure/CMSSW_9_2_4/src/UHH2/common/data/MyDataPileupHistogram.root"/>
 
+	    <!-- <Item Name="lumi_file" Value="/afs/desy.de/user/h/hinzmann/uhh-substructure/CMSSW_9_2_4/src/UHH2/common/data/Cert_294927-300575_13TeV_PromptReco_Collisions17_JSON.root" /> -->
 	    <Item Name="lumi_file" Value="/afs/desy.de/user/h/hinzmann/uhh-substructure/CMSSW_9_2_4/src/UHH2/common/data/Cert_294927-304507_13TeV_PromptReco_Collisions17_JSON.root" />
             
             <!-- Some test configuration; see dijetangularModule.cxx for how to access it: -->
