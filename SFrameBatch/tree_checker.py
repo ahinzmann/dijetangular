@@ -8,12 +8,12 @@ def check_TreeExists(filename,treename):
      rootfile = ROOT.TFile.Open(filename)
      #print filename
      try:
-          rootTree = rootfile.Get(treename)
+          rootTree = rootfile.Get(str(treename))
           entries = rootTree.GetEntriesFast()
           #print filename,'True entries',entries,entries>0
           return  entries>0
      except:
-          print 'False'
+          #print 'False'
           return False
      #entries = rootTree.GetEntriesFast()
      #if rootTree: return False

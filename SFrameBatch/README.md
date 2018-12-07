@@ -1,6 +1,6 @@
 # SFrame Batch
 
-This is a script to split the SFrame XML files and send the jobs to the batch with qsub, while still beeing compatible with plain SFrame. After the jobs are back it also takes care to hadd the jobs if you want it.
+This is a script to split the SFrame xml files and send the jobs to the batch with qsub, while still beeing compatible with plain SFrame. After the jobs are back it also takes care to hadd the jobs for you.
 There are some open issues and possible extensions.
 
 
@@ -32,13 +32,14 @@ There are some open issues and possible extensions.
 
 -> Split by file and by events is in.
 
--> All the information of stdout and stderr is in workdir/Stream_*xml-File-Name*
+-> All the information of stdout and stderr is in workdir/Stream_*xml-File-Name*/
 
 -> For ppl interested in new features pls check the brach *development*. Since coding is most of the time rather easy and debbuging is not. At least some ppl using this branch would be very good. 
 
 ## Issues 
+-> hadd throws some warnings
 
--> very few safety & sanity checks
+-> very few safty & sanity checks
 
 -> Code documantation is missing
 
@@ -46,5 +47,8 @@ There are some open issues and possible extensions.
 
 ## Extensions & improvements
 
+-> http://stackoverflow.com/questions/26104116/qstat-and-long-job-names retrieve names and extendet support for resubmission if job is fails (in progress)
+
+-> automatic resubmission (in progress)
 
 -> gui e.g. see https://github.com/wardi/urwid, it is shipped with cmssw

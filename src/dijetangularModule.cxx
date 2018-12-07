@@ -73,7 +73,9 @@ dijetangularModule::dijetangularModule(Context & ctx) {
     // before the 'common->init(ctx)' line.
     
     // 2. set up selections
-    dijet_sel.reset(new DijetSelection("dijetChi"+postfix)); // see dijetangularSelections
+    auto dataset_type = ctx.get("dataset_type");
+    bool is_mc = dataset_type == "MC";
+    dijet_sel.reset(new DijetSelection("dijetChi"+postfix,is_mc)); // see dijetangularSelections
 
     // 3. Set up Hists classes:
     //h_nocuts.reset(new dijetangularHists(ctx, "NoCuts"));

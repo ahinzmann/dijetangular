@@ -7,13 +7,14 @@ using namespace uhh2examples;
 using namespace uhh2;
 
 
-DijetSelection::DijetSelection(std::string treename, float chi_max, float yboost_max, float mjj_min)
+DijetSelection::DijetSelection(std::string treename, bool is_mc, float chi_max, float yboost_max, float mjj_min)
    : chi_max_(chi_max), yboost_max_(yboost_max), mjj_min_(mjj_min)
    , weight_(1.)
    , lheweight_(1.)
    , puweight_(1.)
    , lumiweight_(1.)
    , varnames("jetAK4_pt1:jetAK4_eta1:jetAK4_y1:jetAK4_phi1:jetAK4_mass1:jetAK4_jec1:jetAK4_muf1:jetAK4_phf1:jetAK4_emf1:jetAK4_nhf1:jetAK4_chf1:jetAK4_area1:jetAK4_cm1:jetAK4_nm1:jetAK4_hof1:jetAK4_chm1:jetAK4_neHadMult1:jetAK4_phoMult1:jetAK4_nemf1:jetAK4_cemf1:jetAK4_csv1:jetAK4_IDTight1:jetAK4_pt2:jetAK4_eta2:jetAK4_y2:jetAK4_phi2:jetAK4_mass2:jetAK4_jec2:jetAK4_muf2:jetAK4_phf2:jetAK4_emf2:jetAK4_nhf2:jetAK4_chf2:jetAK4_area2:jetAK4_cm2:jetAK4_nm2:jetAK4_hof2:jetAK4_chm2:jetAK4_neHadMult2:jetAK4_phoMult2:jetAK4_nemf2:jetAK4_cemf2:jetAK4_csv2:jetAK4_IDTight2:jetAK4_pt3:jetAK4_eta3:jetAK4_y3:jetAK4_phi3:jetAK4_mass3:jetAK4_jec3:jetAK4_muf3:jetAK4_phf3:jetAK4_emf3:jetAK4_nhf3:jetAK4_chf3:jetAK4_area3:jetAK4_cm3:jetAK4_nm3:jetAK4_hof3:jetAK4_chm3:jetAK4_neHadMult3:jetAK4_phoMult3:jetAK4_nemf3:jetAK4_cemf3:jetAK4_csv3:jetAK4_IDTight3:MET_et:MET_sumEt:EVENT_event:EVENT_run:EVENT_lumiBlock:PV_N:mjj:chi:yboost") {
+   if(is_mc) varnames=varnames+":genJetAK4_pt1:genJetAK4_eta1:genJetAK4_y1:genJetAK4_phi1:genJetAK4_mass1:genJetAK4_pt2:genJetAK4_eta2:genJetAK4_y2:genJetAK4_phi2:genJetAK4_mass2:genJetAK4_pt3:genJetAK4_eta3:genJetAK4_y3:genJetAK4_phi3:genJetAK4_mass3:genWeight:nPuVtxTrue:genmjj:genchi:genyboost";
    std::string ending="_tree.root";
    std::cerr << treename+ending << std::endl;
    outfile=new TFile((treename+ending).c_str(),"RECREATE");
@@ -75,7 +76,32 @@ bool DijetSelection::passes(const Event & event){
       values.insert(values.end(),{-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f});
     }
     values.insert(values.end(),{event.met->pt(),-999.f,float(event.event),float(event.run),float(event.luminosityBlock),float(event.pvs->size()),dijet_mass,std::min(dijet_chi,999.f),std::min(dijet_yboost,999.f)});
-    
+
+    assert(event.genjets); // if this fails, it probably means jets are not read in
+    if(event.genjets->size()>0) {
+      const auto & gj = event.genjets->at(0);
+      genjet1.SetPtEtaPhiE( gj.pt(), gj.eta(), gj.phi(), gj.energy() ); } else {
+      genjet1.SetPtEtaPhiM(0,-999.f,-999.f,0); }
+    if(event.genjets->size()>1) {
+      const auto & gj = event.genjets->at(1);
+      genjet2.SetPtEtaPhiE( gj.pt(), gj.eta(), gj.phi(), gj.energy() ); } else {
+      genjet2.SetPtEtaPhiM(0,-999.f,-999.f,0); }
+    if(event.genjets->size()>2) {
+      const auto & gj = event.genjets->at(2);
+      genjet3.SetPtEtaPhiE( gj.pt(), gj.eta(), gj.phi(), gj.energy() ); } else {
+      genjet3.SetPtEtaPhiM(0,-999.f,-999.f,0); }
+    gendijet=genjet1+genjet2;
+
+    gendijet_mass = gendijet.M();
+    gendijet_chi = exp(fabs(genjet1.Rapidity()-genjet2.Rapidity()));
+    gendijet_yboost = fabs(genjet1.Rapidity()+genjet2.Rapidity())/2.;
+
+    values.insert(values.end(),{float(genjet1.Pt()),float(genjet1.Eta()),std::max(std::min(float(genjet1.Rapidity()),999.f),-999.f),float(genjet1.Phi()),float(genjet1.M()),
+float(genjet2.Pt()),float(genjet2.Eta()),std::max(std::min(float(genjet2.Rapidity()),999.f),-999.f),float(genjet2.Phi()),float(genjet2.M()),
+float(genjet3.Pt()),float(genjet3.Eta()),std::max(std::min(float(genjet3.Rapidity()),999.f),-999.f),float(genjet3.Phi()),float(genjet3.M()),
+float(event.weight),event.genInfo->pileup_TrueNumInteractions(),
+gendijet_mass,std::min(gendijet_chi,999.f),std::min(gendijet_yboost,999.f)});
+
     HLT_isFired.clear();
     for(auto triggername : event.get_current_triggernames()) {
 	Event::TriggerIndex triggerIndex=event.get_trigger_index(triggername);

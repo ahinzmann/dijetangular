@@ -15,7 +15,7 @@ namespace uhh2examples {
  */
 class DijetSelection: public uhh2::Selection {
 public:
-    DijetSelection(std::string treename="dijetangular", float chi_max = 16, float yboost_max = 1.11, float mjj_min = 1000.);
+    DijetSelection(std::string treename="dijetangular", bool is_mc = false, float chi_max = 16, float yboost_max = 1.11, float mjj_min = 1000.);
     virtual bool passes(const uhh2::Event & event) override;
     ~DijetSelection();
 private:
@@ -30,7 +30,10 @@ private:
     float dijet_mass;
     float dijet_chi;
     float dijet_yboost;
-    TLorentzVector jet1, jet2, dijet;
+    float gendijet_mass;
+    float gendijet_chi;
+    float gendijet_yboost;
+    TLorentzVector jet1, jet2, genjet1, genjet2, genjet3, dijet, gendijet;
     
     std::string varnames;
     std::vector<float> values;

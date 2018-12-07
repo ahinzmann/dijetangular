@@ -35,7 +35,7 @@ if __name__=="__main__":
     gStyle.SetEndErrorSize(5)
 
     f1=TFile.Open("datacard_shapelimit13TeV_GENnp-18-v5_chi2016.root")
-    f2=TFile.Open("uhh2.AnalysisModuleRunner.DATA.Run2017_RunBCD_PromtReco-v1.root")
+    f2=TFile.Open("/nfs/dust/cms/user/hinzmann/dijetangular/uhh2.AnalysisModuleRunner.DATA.Run2017_RunBCDEF_17Nov2017-v1.root")
 
     massbins=[(2400,3000),
               (3000,3600),
@@ -91,7 +91,7 @@ if __name__=="__main__":
       l.AddEntry(h0,"NLO QCD+EW+detector","l")
       l.AddEntry(h0b," + #mu scale up","l")
       l.AddEntry(h1,"2016 data 36.5/fb","l")
-      l.AddEntry(h2,"2017 data 17.8/fb","l")
+      l.AddEntry(h2,"2017 data 41.4/fb","l")
       l.SetFillStyle(0)
       l.Draw("same")
       c.SaveAs("chi"+str(massbins[i][0])+"_"+str(massbins[i][1])+"_2016_2017.pdf")
