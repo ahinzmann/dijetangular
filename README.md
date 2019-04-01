@@ -6,11 +6,11 @@ sframe_main config/dijetangular.xml
 
 cd /nfs/dust/cms/user/hinzmann/dijetangular
 
-sframe_batch.py /afs/desy.de/user/h/hinzmann/uhh94/CMSSW_9_4_1/src/UHH2/dijetangular/config/dijetangular.xml -s
+sframe_batch.py /afs/desy.de/user/h/hinzmann/uhh102/CMSSW_10_2_10/src/UHH2/dijetangular/config/dijetangular.xml -s
 
-source /afs/desy.de/user/h/hinzmann/uhh94/CMSSW_9_4_1/src/UHH2/dijetangular/add_samples.sh
+source /afs/desy.de/user/h/hinzmann/uhh102/CMSSW_10_2_10/src/UHH2/dijetangular/add_samples.sh
 
-python /afs/desy.de/user/h/hinzmann/uhh94/CMSSW_9_4_1/src/UHH2/dijetangular/splitfiles.py
+python /afs/desy.de/user/h/hinzmann/uhh102/CMSSW_10_2_10/src/UHH2/dijetangular/splitfiles.py
 
 kinit -l 1094 hinzmann@CERN.CH
 xrdcp dijetChiRun2017_*v1-* root://eosuser.cern.ch//eos/user/h/hinzmann/dijetangular/

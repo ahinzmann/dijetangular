@@ -12,6 +12,9 @@ dijetangularHists::dijetangularHists(Context & ctx, const string & dirname): His
   // book all histograms here
   // jets
   book<TH1F>("dijet_mass", "M_{jj}", 130, 0, 13000);  
+  book<TH1F>("chi_1000_1200", "#chi_{dijet}", 15, 1, 16);
+  book<TH1F>("chi_1200_1500", "#chi_{dijet}", 15, 1, 16);
+  book<TH1F>("chi_1500_1900", "#chi_{dijet}", 15, 1, 16);
   book<TH1F>("chi_1900_2400", "#chi_{dijet}", 15, 1, 16);
   book<TH1F>("chi_2400_3000", "#chi_{dijet}", 15, 1, 16);
   book<TH1F>("chi_3000_3600", "#chi_{dijet}", 15, 1, 16);
@@ -19,11 +22,9 @@ dijetangularHists::dijetangularHists(Context & ctx, const string & dirname): His
   book<TH1F>("chi_4200_4800", "#chi_{dijet}", 15, 1, 16);
   book<TH1F>("chi_4800_5400", "#chi_{dijet}", 15, 1, 16);
   book<TH1F>("chi_5400_6000", "#chi_{dijet}", 15, 1, 16);
-  book<TH1F>("chi_6000_6600", "#chi_{dijet}", 15, 1, 16);
-  book<TH1F>("chi_6600_7200", "#chi_{dijet}", 15, 1, 16);
-  book<TH1F>("chi_7200_13000", "#chi_{dijet}", 15, 1, 16);
+  book<TH1F>("chi_6000_7000", "#chi_{dijet}", 15, 1, 16);
   book<TH1F>("chi_6000_13000", "#chi_{dijet}", 15, 1, 16);
-  book<TH1F>("chi_6600_13000", "#chi_{dijet}", 15, 1, 16);
+  book<TH1F>("chi_7000_13000", "#chi_{dijet}", 15, 1, 16);
 
   // primary vertices
   book<TH1F>("N_pv", "N^{PV}", 100, 0, 100);
@@ -51,6 +52,12 @@ void dijetangularHists::fill(const Event & event){
   dijet_yboost = fabs(jet1.Rapidity()+jet2.Rapidity())/2.0;
   
   hist("dijet_mass")->Fill(dijet_mass,weight); 
+  if((dijet_mass>=1000)&&(dijet_mass<1200))
+    hist("chi_1000_1200")->Fill(dijet_chi,weight);
+  if((dijet_mass>=1200)&&(dijet_mass<1500))
+    hist("chi_1200_1500")->Fill(dijet_chi,weight);
+  if((dijet_mass>=1500)&&(dijet_mass<1900))
+    hist("chi_1500_1900")->Fill(dijet_chi,weight);
   if((dijet_mass>=1900)&&(dijet_mass<2400))
     hist("chi_1900_2400")->Fill(dijet_chi,weight);
   if((dijet_mass>=2400)&&(dijet_mass<3000))
@@ -65,16 +72,12 @@ void dijetangularHists::fill(const Event & event){
     hist("chi_4800_5400")->Fill(dijet_chi,weight);
   if((dijet_mass>=5400)&&(dijet_mass<6000))
     hist("chi_5400_6000")->Fill(dijet_chi,weight);
-  if((dijet_mass>=6000)&&(dijet_mass<6600))
-    hist("chi_6000_6600")->Fill(dijet_chi,weight);
-  if((dijet_mass>=6600)&&(dijet_mass<7200))
-    hist("chi_6600_7200")->Fill(dijet_chi,weight);
-  if((dijet_mass>=7200)&&(dijet_mass<13000))
-    hist("chi_7200_13000")->Fill(dijet_chi,weight);
+  if((dijet_mass>=6000)&&(dijet_mass<7000))
+    hist("chi_6000_7000")->Fill(dijet_chi,weight);
   if((dijet_mass>=6000)&&(dijet_mass<13000))
     hist("chi_6000_13000")->Fill(dijet_chi,weight);
-  if((dijet_mass>=6600)&&(dijet_mass<13000))
-    hist("chi_6600_13000")->Fill(dijet_chi,weight);
+  if((dijet_mass>=7000)&&(dijet_mass<13000))
+    hist("chi_7000_13000")->Fill(dijet_chi,weight);
   
   int Npvs = event.pvs->size();
   hist("N_pv")->Fill(Npvs, weight);

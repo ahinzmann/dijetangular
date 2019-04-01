@@ -25,6 +25,7 @@ private:
     float lheweight_;
     float puweight_;
     float lumiweight_;
+    bool is_mc_;
     bool passedTrigger_;
 
     float dijet_mass;
