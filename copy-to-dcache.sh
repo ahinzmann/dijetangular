@@ -1,0 +1,5 @@
+gfal-copy -r dijetChiRun2017_RunB_17Nov2017-v1.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/data2017/"
+gfal-copy -r dijetChiRun2017_RunC_17Nov2017-v1.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/data2017/"
+gfal-copy -r dijetChiRun2017_RunD_17Nov2017-v1.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/data2017/"
+gfal-copy -r dijetChiRun2017_RunE_17Nov2017-v1.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/data2017/"
+gfal-copy -r dijetChiRun2017_RunF_17Nov2017-v1.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/data2017/"
