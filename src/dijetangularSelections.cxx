@@ -47,7 +47,7 @@ bool DijetSelection::passes(const Event & event){
 	     ((fabs(event.jets->at(0).eta())>2.4)||
 	      ((event.jets->at(0).chargedHadronEnergyFraction()>0)&&
 	       (event.jets->at(0).chargedMultiplicity()>0)&&
-	       (event.jets->at(0).chargedEmEnergyFraction()<0.9))));
+	       (event.jets->at(0).chargedEmEnergyFraction()<0.8))));
 	     
     bool jet2ID=((event.jets->at(1).neutralHadronEnergyFraction()<0.9)&&
 	     (event.jets->at(1).neutralEmEnergyFraction()<0.9)&&
@@ -56,7 +56,7 @@ bool DijetSelection::passes(const Event & event){
 	     ((fabs(event.jets->at(1).eta())>2.4)||
 	      ((event.jets->at(1).chargedHadronEnergyFraction()>0)&&
 	       (event.jets->at(1).chargedMultiplicity()>0)&&
-	       (event.jets->at(1).chargedEmEnergyFraction()<0.9))));
+	       (event.jets->at(1).chargedEmEnergyFraction()<0.8))));
 
     if((!jet1ID)||(!jet2ID)) return false;
 
@@ -64,13 +64,14 @@ bool DijetSelection::passes(const Event & event){
     values.insert(values.end(),{event.jets->at(0).pt(),event.jets->at(0).eta(),std::max(std::min(float(event.jets->at(0).v4().Rapidity()),999.f),-999.f),event.jets->at(0).phi(),float(event.jets->at(0).v4().mass()), event.jets->at(0).JEC_factor_raw(),event.jets->at(0).muonEnergyFraction(),event.jets->at(0).photonEnergyFraction(),-999.f,event.jets->at(0).neutralHadronEnergyFraction(), event.jets->at(0).chargedHadronEnergyFraction(),event.jets->at(0).jetArea(),float(event.jets->at(0).chargedMultiplicity()),float(event.jets->at(0).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(0).photonMultiplicity()),event.jets->at(0).neutralEmEnergyFraction(),event.jets->at(0).chargedEmEnergyFraction(),event.jets->at(0).btag_combinedSecondaryVertexMVA(),float(jet1ID)});
     values.insert(values.end(),{event.jets->at(1).pt(),event.jets->at(1).eta(),std::max(std::min(float(event.jets->at(1).v4().Rapidity()),999.f),-999.f),event.jets->at(1).phi(),float(event.jets->at(1).v4().mass()), event.jets->at(1).JEC_factor_raw(),event.jets->at(1).muonEnergyFraction(),event.jets->at(1).photonEnergyFraction(),-999.f,event.jets->at(1).neutralHadronEnergyFraction(), event.jets->at(1).chargedHadronEnergyFraction(),event.jets->at(1).jetArea(),float(event.jets->at(1).chargedMultiplicity()),float(event.jets->at(1).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(1).photonMultiplicity()),event.jets->at(1).neutralEmEnergyFraction(),event.jets->at(1).chargedEmEnergyFraction(),event.jets->at(1).btag_combinedSecondaryVertexMVA(),float(jet2ID)});
     if(event.jets->size()>2) {
-      bool jet3ID=((event.jets->at(2).neutralHadronEnergyFraction()<0.99)&&
-	     (event.jets->at(2).neutralEmEnergyFraction()<0.99)&&
+      bool jet3ID=((event.jets->at(2).neutralHadronEnergyFraction()<0.9)&&
+	     (event.jets->at(2).neutralEmEnergyFraction()<0.9)&&
 	     (event.jets->at(2).numberOfDaughters()>1)&&
+	     (event.jets->at(2).muonEnergyFraction()<0.8)&&
 	     ((fabs(event.jets->at(2).eta())>2.4)||
 	      ((event.jets->at(2).chargedHadronEnergyFraction()>0)&&
 	       (event.jets->at(2).chargedMultiplicity()>0)&&
-	       (event.jets->at(2).chargedEmEnergyFraction()<0.99))));
+	       (event.jets->at(2).chargedEmEnergyFraction()<0.8))));
 
       values.insert(values.end(),{event.jets->at(2).pt(),event.jets->at(2).eta(),std::max(std::min(float(event.jets->at(2).v4().Rapidity()),999.f),-999.f),event.jets->at(2).phi(),float(event.jets->at(2).v4().mass()), event.jets->at(2).JEC_factor_raw(),event.jets->at(2).muonEnergyFraction(),event.jets->at(2).photonEnergyFraction(),-999.f,event.jets->at(2).neutralHadronEnergyFraction(), event.jets->at(2).chargedHadronEnergyFraction(),event.jets->at(2).jetArea(),float(event.jets->at(2).chargedMultiplicity()),float(event.jets->at(2).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(2).photonMultiplicity()),event.jets->at(2).neutralEmEnergyFraction(),event.jets->at(2).chargedEmEnergyFraction(),event.jets->at(2).btag_combinedSecondaryVertexMVA(),float(jet3ID)});
     } else {

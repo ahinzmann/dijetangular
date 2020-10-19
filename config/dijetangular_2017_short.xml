@@ -12,19 +12,10 @@
     <Package Name="SUHH2dijetangular.par" />
 
    <Cycle Name="uhh2::AnalysisModuleRunner" OutputDirectory="./" PostFix="" TargetLumi="1" >
-        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="Run2017_RunB_17Nov2017-v1" Cacheable="False">
-<In FileName="/pnfs/desy.de/cms/tier2/store/user/cgarbers/Run2017_data_94X/Run2017_RunB_17Nov2017_v1_completeDataset/JetHT_RunB_17Nov2017_v1_0_Ntuple.root" Lumi="0.0"/>
-<In FileName="/pnfs/desy.de/cms/tier2/store/user/cgarbers/Run2017_data_94X/Run2017_RunB_17Nov2017_v1_completeDataset/JetHT_RunB_17Nov2017_v1_1000_Ntuple.root" Lumi="0.0"/>
-<!-- number of events: 62988012 -->
-
-            <InputTree Name="AnalysisTree" /> 
-        </InputData>
-	
-        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="Run2017_RunC_17Nov2017-v1" Cacheable="False">
-
-<In FileName="/pnfs/desy.de/cms/tier2/store/user/cgarbers/Run2017_data_94X/Run2017_RunC_17Nov2017_v1_completeDataset/JetHT_RunC_17Nov17_v1_0_Ntuple.root" Lumi="0.0"/>
-<In FileName="/pnfs/desy.de/cms/tier2/store/user/cgarbers/Run2017_data_94X/Run2017_RunC_17Nov2017_v1_completeDataset/JetHT_RunC_17Nov17_v1_1000_Ntuple.root" Lumi="0.0"/>
-<!-- number of events: 113430556 -->
+        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="Run2017_RunB_RunII_102X_v1" Cacheable="False">
+<In FileName="/pnfs/desy.de/cms/tier2//store/user/salbrech/RunII_102X_v1/2017v2//JetHT/crab_JetHT_2017B_v1/190510_082853/0000/Ntuple_1.root" Lumi="0.0"/>
+<In FileName="/pnfs/desy.de/cms/tier2//store/user/salbrech/RunII_102X_v1/2017v2//JetHT/crab_JetHT_2017F_v1/190509_100509/0005/Ntuple_5010.root" Lumi="0.0"/>
+<!-- < NumberEntries="115429972" Method=fast /> -->
 
             <InputTree Name="AnalysisTree" />
             <!-- uncomment to write tree of selected events, i.e. of those events for which the AnalysisModule::process method  returns true
@@ -35,7 +26,7 @@
         <UserConfig>
             <!-- define which collections to read from the input. Only specify what you need to save I/O time -->
             <Item Name="PrimaryVertexCollection" Value="offlineSlimmedPrimaryVertices" /> 
-            <Item Name="JetCollection" Value="slimmedJets" />
+            <Item Name="JetCollection" Value="jetsAk4CHS" />
             <Item Name="GenJetCollection" Value="slimmedGenJets" />
             <Item Name="METName" Value="slimmedMETs" />
             <!-- <Item Name="ElectronCollection" Value="slimmedElectrons" />
@@ -77,9 +68,9 @@
             
             <!-- configuration for MCPileupReweight (run as part of CommonModules): -->
             <Item Name="pileup_directory" Value="" />
-	    <Item Name="pileup_directory_data" Value="/afs/desy.de/user/h/hinzmann/uhh94/CMSSW_9_4_1/src/UHH2/common/data/MyDataPileupHistogram_EOY2017ReReco.root"/>
+	    <Item Name="pileup_directory_data" Value="/afs/desy.de/user/h/hinzmann/uhh102/CMSSW_10_2_10/src/UHH2/common/data/2017/MyDataPileupHistogram2017.root"/>
 
-	    <Item Name="lumi_file" Value="/afs/desy.de/user/h/hinzmann/uhh94/CMSSW_9_4_1/src/UHH2/common/data/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON.root" />
+	    <Item Name="lumi_file" Value="/afs/desy.de/user/h/hinzmann/uhh102/CMSSW_10_2_10/src/UHH2/common/data/2017/Cert_294927-306462_13TeV_EOY2017ReReco_Collisions17_JSON_v1.root" />
             
             <!-- Some test configuration; see dijetangularModule.cxx for how to access it: -->
             <Item Name="PostFix" Value="" />
