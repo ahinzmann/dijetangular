@@ -130,6 +130,7 @@ def getFileNames_dasgoclient(event):
     #else:
     if True:
         for row in json.load(proc.stdout):
+	    print row
             for rec in row.get('file', []):
                 fname = rec.get('name', '')
                 if fname:
@@ -347,8 +348,10 @@ https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookPickEvents ''')
             fileSet.add (filename)
             uniqueFiles.append (filename)
         source = ','.join (uniqueFiles) + '\n'
+        #eventsToProcess = ','.join(\
+        #  sorted( [ "%d:%d" % (event.run, event.event) for event in eventList ] ) )
         eventsToProcess = ','.join(\
-          sorted( [ "%d:%d" % (event.run, event.event) for event in eventList ] ) )
+          sorted( [ "%d:%d-%d:%d" % (event.run, event.event-128,event.run, event.event+128) for event in eventList ] ) ) # take+-128 to fix rounding errors from int(np.float32(709687929))=709687936
         command = 'edmCopyPickMerge outputFile=%s.root \\\n  eventsToProcess=%s \\\n  inputFiles=%s' \
                   % (options.base, eventsToProcess, source)
         print "\n%s" % command
