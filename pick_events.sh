@@ -30,7 +30,7 @@ rm ~/.dasmaps/das_maps_dbs_prod.js
 ./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017E-31Mar2018-v1/MINIAOD" --output pick2017Emini events7tev.txt
 ./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017F-31Mar2018-v1/MINIAOD" --output pick2017Fmini events7tev.txt
 ./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016B-17Jul2018_ver1-v1/MINIAOD" --output pick2016B1mini events7tev.txt
-./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016B-17Jul2018_ver2-v1/MINIAOD" --output pick2016B2mini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016B-17Jul2018_ver2-v2/MINIAOD" --output pick2016B2mini events7tev.txt
 ./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016C-17Jul2018-v1/MINIAOD" --output pick2016Cmini events7tev.txt
 ./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016D-17Jul2018-v1/MINIAOD" --output pick2016Dmini events7tev.txt
 ./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016E-17Jul2018-v1/MINIAOD" --output pick2016Emini events7tev.txt
