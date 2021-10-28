@@ -39,6 +39,9 @@ private:
     std::string varnames;
     std::vector<float> values;
     std::map<std::string,bool> HLT_isFired;
+    double EVENT;
+    double RUN;
+    double LUMI;
     
     TFile* outfile;
     TNtuple* tree;

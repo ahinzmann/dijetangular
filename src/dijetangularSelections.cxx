@@ -21,6 +21,9 @@ DijetSelection::DijetSelection(std::string treename, bool is_mc, float chi_max, 
    outfile=new TFile((treename+ending).c_str(),"RECREATE");
    tree=new TNtuple("tree","tree",varnames.c_str());
    tree->Branch("HLT_isFired","map<string,bool>",&HLT_isFired);
+   tree->Branch("EVENT",&EVENT,"EVENT/D");
+   tree->Branch("RUN",&RUN,"RUN/D");
+   tree->Branch("LUMI",&LUMI,"LUMI/D");
 }
     
 bool DijetSelection::passes(const Event & event){
@@ -61,8 +64,8 @@ bool DijetSelection::passes(const Event & event){
     if((!jet1ID)||(!jet2ID)) return false;
 
     values.clear();
-    values.insert(values.end(),{event.jets->at(0).pt(),event.jets->at(0).eta(),std::max(std::min(float(event.jets->at(0).v4().Rapidity()),999.f),-999.f),event.jets->at(0).phi(),float(event.jets->at(0).v4().mass()), event.jets->at(0).JEC_factor_raw(),event.jets->at(0).muonEnergyFraction(),event.jets->at(0).photonEnergyFraction(),-999.f,event.jets->at(0).neutralHadronEnergyFraction(), event.jets->at(0).chargedHadronEnergyFraction(),event.jets->at(0).jetArea(),float(event.jets->at(0).chargedMultiplicity()),float(event.jets->at(0).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(0).photonMultiplicity()),event.jets->at(0).neutralEmEnergyFraction(),event.jets->at(0).chargedEmEnergyFraction(),event.jets->at(0).btag_combinedSecondaryVertexMVA(),float(jet1ID)});
-    values.insert(values.end(),{event.jets->at(1).pt(),event.jets->at(1).eta(),std::max(std::min(float(event.jets->at(1).v4().Rapidity()),999.f),-999.f),event.jets->at(1).phi(),float(event.jets->at(1).v4().mass()), event.jets->at(1).JEC_factor_raw(),event.jets->at(1).muonEnergyFraction(),event.jets->at(1).photonEnergyFraction(),-999.f,event.jets->at(1).neutralHadronEnergyFraction(), event.jets->at(1).chargedHadronEnergyFraction(),event.jets->at(1).jetArea(),float(event.jets->at(1).chargedMultiplicity()),float(event.jets->at(1).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(1).photonMultiplicity()),event.jets->at(1).neutralEmEnergyFraction(),event.jets->at(1).chargedEmEnergyFraction(),event.jets->at(1).btag_combinedSecondaryVertexMVA(),float(jet2ID)});
+    values.insert(values.end(),{event.jets->at(0).pt(),event.jets->at(0).eta(),std::max(std::min(float(event.jets->at(0).v4().Rapidity()),999.f),-999.f),event.jets->at(0).phi(),float(event.jets->at(0).v4().mass()), event.jets->at(0).JEC_factor_raw(),event.jets->at(0).muonEnergyFraction(),event.jets->at(0).photonEnergyFraction(),-999.f,event.jets->at(0).neutralHadronEnergyFraction(), event.jets->at(0).chargedHadronEnergyFraction(),event.jets->at(0).jetArea(),float(event.jets->at(0).chargedMultiplicity()),float(event.jets->at(0).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(0).photonMultiplicity()),event.jets->at(0).neutralEmEnergyFraction(),event.jets->at(0).chargedEmEnergyFraction(),event.jets->at(0).btag_DeepJet(),float(jet1ID)});
+    values.insert(values.end(),{event.jets->at(1).pt(),event.jets->at(1).eta(),std::max(std::min(float(event.jets->at(1).v4().Rapidity()),999.f),-999.f),event.jets->at(1).phi(),float(event.jets->at(1).v4().mass()), event.jets->at(1).JEC_factor_raw(),event.jets->at(1).muonEnergyFraction(),event.jets->at(1).photonEnergyFraction(),-999.f,event.jets->at(1).neutralHadronEnergyFraction(), event.jets->at(1).chargedHadronEnergyFraction(),event.jets->at(1).jetArea(),float(event.jets->at(1).chargedMultiplicity()),float(event.jets->at(1).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(1).photonMultiplicity()),event.jets->at(1).neutralEmEnergyFraction(),event.jets->at(1).chargedEmEnergyFraction(),event.jets->at(1).btag_DeepJet(),float(jet2ID)});
     if(event.jets->size()>2) {
       bool jet3ID=((event.jets->at(2).neutralHadronEnergyFraction()<0.9)&&
 	     (event.jets->at(2).neutralEmEnergyFraction()<0.9)&&
@@ -73,7 +76,7 @@ bool DijetSelection::passes(const Event & event){
 	       (event.jets->at(2).chargedMultiplicity()>0)&&
 	       (event.jets->at(2).chargedEmEnergyFraction()<0.8))));
 
-      values.insert(values.end(),{event.jets->at(2).pt(),event.jets->at(2).eta(),std::max(std::min(float(event.jets->at(2).v4().Rapidity()),999.f),-999.f),event.jets->at(2).phi(),float(event.jets->at(2).v4().mass()), event.jets->at(2).JEC_factor_raw(),event.jets->at(2).muonEnergyFraction(),event.jets->at(2).photonEnergyFraction(),-999.f,event.jets->at(2).neutralHadronEnergyFraction(), event.jets->at(2).chargedHadronEnergyFraction(),event.jets->at(2).jetArea(),float(event.jets->at(2).chargedMultiplicity()),float(event.jets->at(2).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(2).photonMultiplicity()),event.jets->at(2).neutralEmEnergyFraction(),event.jets->at(2).chargedEmEnergyFraction(),event.jets->at(2).btag_combinedSecondaryVertexMVA(),float(jet3ID)});
+      values.insert(values.end(),{event.jets->at(2).pt(),event.jets->at(2).eta(),std::max(std::min(float(event.jets->at(2).v4().Rapidity()),999.f),-999.f),event.jets->at(2).phi(),float(event.jets->at(2).v4().mass()), event.jets->at(2).JEC_factor_raw(),event.jets->at(2).muonEnergyFraction(),event.jets->at(2).photonEnergyFraction(),-999.f,event.jets->at(2).neutralHadronEnergyFraction(), event.jets->at(2).chargedHadronEnergyFraction(),event.jets->at(2).jetArea(),float(event.jets->at(2).chargedMultiplicity()),float(event.jets->at(2).neutralMultiplicity()),-999.f,-999.f,-999.f, float(event.jets->at(2).photonMultiplicity()),event.jets->at(2).neutralEmEnergyFraction(),event.jets->at(2).chargedEmEnergyFraction(),event.jets->at(2).btag_DeepJet(),float(jet3ID)});
     } else {
       values.insert(values.end(),{-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f,-999.f});
     }
@@ -113,6 +116,10 @@ gendijet_mass,std::min(gendijet_chi,999.f),std::min(gendijet_yboost,999.f)});
 	Event::TriggerIndex triggerIndex=event.get_trigger_index(triggername);
         HLT_isFired[triggername]=event.passes_trigger(triggerIndex);
     }
+    EVENT = event.event; // double precision
+    RUN = event.run;
+    LUMI = event.luminosityBlock;
+
     tree->Fill(&values[0]);
 
     return true;

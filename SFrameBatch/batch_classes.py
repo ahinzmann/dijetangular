@@ -31,7 +31,7 @@ sframe_main $1
     submit_file.write(
         """#HTC Submission File for SFrameBatch
 # +MyProject        =  "af-cms" 
-requirements      =  OpSysAndVer == "SL6"
+requirements      =  OpSysAndVer == "CentOS7"
 universe          = vanilla
 # #Running in local mode with 8 cpu slots
 # universe          =  local
@@ -70,7 +70,7 @@ def resub_script(name,workdir,header):
     submitfile.write(
 """#HTC Submission File for SFrameBatch
 # +MyProject        =  "af-cms" 
-requirements      =  OpSysAndVer == "SL6"
+requirements      =  OpSysAndVer == "CentOS7"
 universe          = vanilla
 # #Running in local mode with 8 cpu slots
 # universe          =  local

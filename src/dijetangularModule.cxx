@@ -94,11 +94,11 @@ bool dijetangularModule::process(Event & event) {
     // returns true, the event is kept; if it returns false, the event
     // is thrown away.
     
-    cout << "dijetangularModule: Starting to process event (runid, eventid) = (" << event.run << ", " << event.event << "); weight = " << event.weight << endl;
+    //cout << "dijetangularModule: Starting to process event (runid, eventid) = (" << event.run << ", " << event.event << "); weight = " << event.weight << endl;
     
     // 1. run all modules other modules.
     bool pass_cm = common->process(event);
-    if(!pass_cm) std::cout << "Event rejected by common modules" << std::endl;
+    if(!pass_cm) std::cout << "Event rejected by common modules (runid, eventid) = (" << event.run << ", " << event.event << ")" << std::endl;
     
     bool dijet_selection = ((pass_cm) && (dijet_sel->passes(event)));
     if(dijet_selection){
