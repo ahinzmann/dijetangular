@@ -45,6 +45,7 @@ log               = $(Stream)/"""+name+""".$(Cluster).log
 #Requesting CPU and DISK Memory - default +RequestRuntime of 3h stays unaltered
 RequestMemory     = """+header.RAM+"""G
 RequestDisk       = """+header.DISK+"""G
+#+RequestRuntime    = 40000
 #You need to set up sframe
 getenv            = True
 environment       = "LD_LIBRARY_PATH_STORED="""+os.environ.get('LD_LIBRARY_PATH')+""""
@@ -85,6 +86,7 @@ log               = $(Stream)/"""+name+""".$(Cluster).log
 # RequestMemory     = """+header.RAM+"""G
 RequestMemory     = 8G
 RequestDisk       = """+header.DISK+"""G
+#+RequestRuntime    = 40000
 #You need to set up sframe
 getenv            = True
 environment       = "LD_LIBRARY_PATH_STORED="""+os.environ.get('LD_LIBRARY_PATH')+""""

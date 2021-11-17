@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE JobConfiguration PUBLIC "" "JobConfig.dtd">
+
+<!--
+   <ConfigParse NEventsBreak="0" LastBreak="0" FileSplit="300" />
+   <ConfigSGE RAM ="2" DISK ="2" Mail="andreas.hinzmann@desy.de" Notification="as" Workdir="workdir"/>
+-->
+
+<!-- OutputLevel controls which messages are printed; set to VERBOSE or DEBUG for more verbosity, to WARNING or ERROR for less -->
+<JobConfiguration JobName="dijetangularCycleJob" OutputLevel="INFO">
+    <Library Name="libSUHH2dijetangular"/>
+    <Package Name="SUHH2dijetangular.par" />
+
+   <Cycle Name="uhh2::AnalysisModuleRunner" OutputDirectory="./" PostFix="" TargetLumi="1" >
+        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="UL16preVFP_RunB_ver1_RunII_106X_v1" Cacheable="False">
+<In FileName="/pnfs/desy.de/cms/tier2//store/group/uhh/uhh2ntuples/RunII_106X_v1/UL16//JetHT/crab_JetHT_2016B_ver1_v1/201020_093215/0000/Ntuple_101.root" Lumi="0.0"/>
+            <InputTree Name="AnalysisTree" /> 
+        </InputData>
+
+        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="UL16preVFP_RunB_ver2_RunII_106X_v1" Cacheable="False">
+<In FileName="/pnfs/desy.de/cms/tier2//store/group/uhh/uhh2ntuples/RunII_106X_v1/UL16//JetHT/crab_JetHT_2016B_ver2_v1/201020_093405/0000/Ntuple_101.root" Lumi="0.0"/>
+            <InputTree Name="AnalysisTree" /> 
+        </InputData>
+
+        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="UL16preVFP_RunC_RunII_106X_v1" Cacheable="False">
+<In FileName="/pnfs/desy.de/cms/tier2//store/group/uhh/uhh2ntuples/RunII_106X_v1/UL16//JetHT/crab_JetHT_2016C_v1/201020_093558/0000/Ntuple_101.root" Lumi="0.0"/>
+            <InputTree Name="AnalysisTree" /> 
+        </InputData>
+
+        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="UL16preVFP_RunD_RunII_106X_v1" Cacheable="False">
+<In FileName="/pnfs/desy.de/cms/tier2//store/group/uhh/uhh2ntuples/RunII_106X_v1/UL16//JetHT/crab_JetHT_2016D_v1/201020_093802/0000/Ntuple_101.root" Lumi="0.0"/>
+            <InputTree Name="AnalysisTree" /> 
+        </InputData>
+
+        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="UL16preVFP_RunE_RunII_106X_v1" Cacheable="False">
+<In FileName="/pnfs/desy.de/cms/tier2//store/group/uhh/uhh2ntuples/RunII_106X_v1/UL16//JetHT/crab_JetHT_2016E_v1/201020_093951/0000/Ntuple_101.root" Lumi="0.0"/>
+            <InputTree Name="AnalysisTree" /> 
+        </InputData>
+
+        <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="UL16preVFP_RunF_HIPM_RunII_106X_v1" Cacheable="False">
+<In FileName="/pnfs/desy.de/cms/tier2//store/group/uhh/uhh2ntuples/RunII_106X_v1/UL16//JetHT/crab_JetHT_2016F_HIPM_v1/210220_163254/0000/Ntuple_101.root" Lumi="0.0"/>
+            <InputTree Name="AnalysisTree" /> 
+        </InputData>
+      
+        <UserConfig>
+            <!-- define which collections to read from the input. Only specify what you need to save I/O time -->
+            <Item Name="PrimaryVertexCollection" Value="offlineSlimmedPrimaryVertices" /> 
+            <Item Name="JetCollection" Value="jetsAk4CHS" />
+            <Item Name="GenJetCollection" Value="slimmedGenJets" />
+            <Item Name="METName" Value="slimmedMETs" />
+            <!-- <Item Name="ElectronCollection" Value="slimmedElectrons" />
+            <Item Name="MuonCollection" Value="slimmedMuons" /> 
+            <Item Name="TauCollection" Value="slimmedTaus" /> -->
+            
+            <!-- The list of available collections to read in corresponds to the pointer members in event. The 'Name's to use here in the configuration are:
+            
+                 PrimaryVertexCollection
+                 ElectronCollection
+                 MuonCollection
+                 TauCollection
+                 PhotonCollection
+                 JetCollection
+                 TopJetCollection
+                 METName
+                 
+                 GenInfoName
+                 GenJetCollection
+                 GenTopJetCollection
+                 GenParticleCollection
+                 
+                 Note that the last four are only read in for MC (InputData Type="MC"), so it is save to specify
+                 them for real data, although those branches do not exist.
+                 
+                 As 'Value', always use the branch name (if in doubt, open the input file in ROOT).
+                 
+                 By default, triggers are read. To explicitly disable reading triggers, use:
+                 <Item Name="readTrigger" Value="false" />
+            -->
+            
+            <!-- the class name of the AnalysisModule subclasses to run: -->
+            <Item Name="AnalysisModule" Value="dijetangularModule" /> 
+            
+            <!-- tell AnalysisModuleRunner NOT to use the MC event weight from SFrame; rather let
+                 MCLumiWeight (called via CommonModules) calculate the MC event weight. The MC
+                 event weight assigned by MCLumiWeight is InputData.Lumi / Cycle.TargetLumi. -->
+            <Item Name="use_sframe_weight" Value="false" />
+            
+            <!-- configuration for MCPileupReweight (run as part of CommonModules): -->
+            <Item Name="pileup_directory" Value="" />
+	    <Item Name="pileup_directory_data" Value="/afs/desy.de/user/h/hinzmann/uhh106/CMSSW_10_6_26/src/UHH2/common/data/UL16preVFP/MyDataPileupHistogram_UL16preVFP.root"/>
+
+	    <Item Name="lumi_file" Value="/afs/desy.de/user/h/hinzmann/uhh106/CMSSW_10_6_26/src/UHH2/common/data/UL16preVFP/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON_UL16preVFP_normtag.root"/>
+            
+            <!-- Some test configuration; see dijetangularModule.cxx for how to access it: -->
+            <Item Name="PostFix" Value="" />
+        </UserConfig>
+    </Cycle>
+</JobConfiguration>
