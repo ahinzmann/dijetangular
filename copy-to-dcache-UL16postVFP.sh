@@ -37,13 +37,7 @@ gfal-copy -r -f workdir/dijetChiUL16postVFP_RunH_RunII_106X_v1_16_tree.root "srm
 gfal-copy -r -f workdir/dijetChiUL16postVFP_RunH_RunII_106X_v1_17_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataUL16postVFPoct/"
 gfal-copy -r -f workdir/dijetChiUL16postVFP_RunH_RunII_106X_v1_18_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataUL16postVFPoct/"
 
-#gfal-copy -r -f workdir/dijetChiQCD_HT1000to1500_RunII_2016v3_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFP/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT1500to2000_RunII_2016v3_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFP/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT2000toInf_RunII_2016v3_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFP/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT200to300_RunII_2016v3_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFP/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT300to500_RunII_2016v3_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFP/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT500to700_RunII_2016v3_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFP/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT700to1000_RunII_2016v3_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFP/"
+find workdir/ -type f -name "dijetChiUL16postVFP_QCD_HT*" -exec gfal-copy -r -f {} "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL16postVFPoct/" \;
 
 #gfal-copy -r -f workdir/dijetChiUL16postVFP_SingleMuon_RunB_RunII_106X_v1_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataSingleMuon2016/"
 #gfal-copy -r -f workdir/dijetChiUL16postVFP_SingleMuon_RunC_RunII_106X_v1_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataSingleMuon2016/"

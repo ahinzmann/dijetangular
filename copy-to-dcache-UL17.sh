@@ -60,13 +60,7 @@ gfal-copy -r -f workdir/dijetChiUL17_RunF_RunII_106X_v1_14_tree.root "srm://dcac
 gfal-copy -r -f workdir/dijetChiUL17_RunF_RunII_106X_v1_15_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataUL17oct/"
 gfal-copy -r -f workdir/dijetChiUL17_RunF_RunII_106X_v1_16_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataUL17oct/"
 
-#gfal-copy -r -f workdir/dijetChiQCD_HT1000to1500_RunII_94X_v2_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT1500to2000_RunII_94X_v2_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT2000toInf_RunII_94X_v2_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT200to300_RunII_94X_v2_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT300to500_RunII_94X_v2_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT500to700_RunII_94X_v2_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17/"
-#gfal-copy -r -f workdir/dijetChiQCD_HT700to1000_RunII_94X_v2_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17/"
+find workdir/ -type f -name "dijetChiUL17_QCD_HT*" -exec gfal-copy -r -f {} "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/qcdUL17oct/" \;
 
 #gfal-copy -r -f workdir/dijetChiUL17_SingleMuon_RunB_RunII_106X_v1_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataSingleMuon2017/"
 #gfal-copy -r -f workdir/dijetChiUL17_SingleMuon_RunC_RunII_106X_v1_tree.root "srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/hinzmann/dijetangular/dataSingleMuon2017/"
