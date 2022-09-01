@@ -1,0 +1,39 @@
+rm ~/.dasmaps/das_maps_dbs_prod.js
+
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018A-12Nov2019_UL2018-v2/AOD" --output pickEOYlistULreco2018A events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018B-12Nov2019_UL2018-v2/AOD" --output pickEOYlistULreco2018B events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018C-12Nov2019_UL2018_rsb-v1/AOD" --output pickEOYlistULreco2018C events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018D-12Nov2019_UL2018-v5/AOD" --output pickEOYlistULreco2018D events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017B-09Aug2019_UL2017-v1/AOD" --output pickEOYlistULreco2017B events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017C-09Aug2019_UL2017-v1/AOD" --output pickEOYlistULreco2017C events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017D-09Aug2019_UL2017-v1/AOD" --output pickEOYlistULreco2017D events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017E-09Aug2019_UL2017-v1/AOD" --output pickEOYlistULreco2017E events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017F-09Aug2019_UL2017-v1/AOD" --output pickEOYlistULreco2017F events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016B-21Feb2020_ver1_UL2016_HIPM-v1/AOD" --output pickEOYlistULreco2016B1 events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016B-21Feb2020_ver2_UL2016_HIPM-v1/AOD" --output pickEOYlistULreco2016B2 events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016C-21Feb2020_UL2016_HIMP-v1/AOD" --output pickEOYlistULreco2016C events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016D-21Feb2020_UL2016_HIPM-v1/AOD" --output pickEOYlistULreco2016D events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016E-21Feb2020_UL2016_HIPM-v1/AOD" --output pickEOYlistULreco2016E events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016F-21Feb2020_UL2016_HIPM-v1/AOD" --output pickEOYlistULreco2016F events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016F-21Feb2020_UL2016-v1/AOD" --output pickEOYlistULreco2016F events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016G-21Feb2020_UL2016-v1/AOD" --output pickEOYlistULreco2016G events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016H-21Feb2020_UL2016-v1/AOD" --output pickEOYlistULreco2016H events7tev.txt
+
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018A-12Nov2019_UL2018-v2/MINIAOD" --output pickEOYlistULreco2018Amini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018B-12Nov2019_UL2018-v2/MINIAOD" --output pickEOYlistULreco2018Bmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018C-12Nov2019_UL2018_rsb-v1/MINIAOD" --output pickEOYlistULreco2018Cmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2018D-12Nov2019_UL2018-v5/MINIAOD" --output pickEOYlistULreco2018Dmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017B-09Aug2019_UL2017-v1/MINIAOD" --output pickEOYlistULreco2017Bmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017C-09Aug2019_UL2017-v1/MINIAOD" --output pickEOYlistULreco2017Cmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017D-09Aug2019_UL2017-v1/MINIAOD" --output pickEOYlistULreco2017Dmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017E-09Aug2019_UL2017-v1/MINIAOD" --output pickEOYlistULreco2017Emini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2017F-09Aug2019_UL2017-v1/MINIAOD" --output pickEOYlistULreco2017Fmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016B-21Feb2020_ver1_UL2016_HIPM-v1/MINIAOD" --output pickEOYlistULreco2016B1mini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016B-21Feb2020_ver2_UL2016_HIPM-v1/MINIAOD" --output pickEOYlistULreco2016B2mini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016C-21Feb2020_UL2016_HIPM-v1/MINIAOD" --output pickEOYlistULreco2016Cmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016D-21Feb2020_UL2016_HIPM-v1/MINIAOD" --output pickEOYlistULreco2016Dmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016E-21Feb2020_UL2016_HIPM-v1/MINIAOD" --output pickEOYlistULreco2016Emini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016F-21Feb2020_UL2016_HIPM-v1/MINIAOD" --output pickEOYlistULreco2016F1mini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016F-21Feb2020_UL2016-v1/MINIAOD" --output pickEOYlistULreco2016F2mini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016G-21Feb2020_UL2016-v1/MINIAOD" --output pickEOYlistULreco2016Gmini events7tev.txt
+./edmPickEvents.py --runInteractive --maxEventsInteractive=2000 "/JetHT/Run2016H-21Feb2020_UL2016-v1/MINIAOD" --output pickEOYlistULreco2016Hmini events7tev.txt
